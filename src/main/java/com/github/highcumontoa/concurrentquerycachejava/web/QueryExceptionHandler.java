@@ -17,7 +17,7 @@ public class QueryExceptionHandler {
     @ExceptionHandler(QueryFailureException.class)
     public ResponseEntity<Map<String, String>> handle(QueryFailureException ex) {
         HttpStatus status = switch (ex.getReason()) {
-            case OVERLOADED, ACQUIRE_TIMEOUT -> HttpStatus.TOO_MANY_REQUESTS;
+            case OVERLOADED, ACQUIRE_TIMEOUT, WAIT_OVERLOADED, WAIT_TIMEOUT -> HttpStatus.TOO_MANY_REQUESTS;
             case COMPUTE_TIMEOUT -> HttpStatus.GATEWAY_TIMEOUT;
             case UPSTREAM_ERROR -> HttpStatus.BAD_GATEWAY;
         };
