@@ -27,7 +27,7 @@ class CacheInvalidationTest {
         props.setTtlMillis(5_000);
         QueryCacheStore store = new QueryCacheStore(props);
         dependency = new SlowDependency(props);
-        facade = new QueryFacade(props, store, new RequestCoalescer(), new ConcurrencyLimiter(props), dependency);
+        facade = new QueryFacade(props, store, new RequestCoalescer(props), new ConcurrencyLimiter(props), dependency);
     }
 
     @Test

@@ -26,6 +26,12 @@ public class QueryCacheProperties {
     /** 单次底层计算的最大时长（毫秒），超时视为失败且不写缓存。 */
     private long computeTimeoutMillis = 2000;
 
+    /** 同一键已有计算在途时，允许同时等待复用结果的请求数上限（不含发起方），超出快速失败。 */
+    private int coalesceWaiterCapacity = 32;
+
+    /** 同键复用方等待在途计算结果的最大时长（毫秒），超时快速失败。 */
+    private long coalesceWaitTimeoutMillis = 2500;
+
     /** 模拟慢依赖的基础延迟（毫秒）。 */
     private long simulatedDelayMillis = 100;
 
@@ -41,6 +47,10 @@ public class QueryCacheProperties {
     public void setAcquireTimeoutMillis(long acquireTimeoutMillis) { this.acquireTimeoutMillis = acquireTimeoutMillis; }
     public long getComputeTimeoutMillis() { return computeTimeoutMillis; }
     public void setComputeTimeoutMillis(long computeTimeoutMillis) { this.computeTimeoutMillis = computeTimeoutMillis; }
+    public int getCoalesceWaiterCapacity() { return coalesceWaiterCapacity; }
+    public void setCoalesceWaiterCapacity(int coalesceWaiterCapacity) { this.coalesceWaiterCapacity = coalesceWaiterCapacity; }
+    public long getCoalesceWaitTimeoutMillis() { return coalesceWaitTimeoutMillis; }
+    public void setCoalesceWaitTimeoutMillis(long coalesceWaitTimeoutMillis) { this.coalesceWaitTimeoutMillis = coalesceWaitTimeoutMillis; }
     public long getSimulatedDelayMillis() { return simulatedDelayMillis; }
     public void setSimulatedDelayMillis(long simulatedDelayMillis) { this.simulatedDelayMillis = simulatedDelayMillis; }
 }

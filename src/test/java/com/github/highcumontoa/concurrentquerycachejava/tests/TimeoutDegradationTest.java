@@ -34,7 +34,7 @@ class TimeoutDegradationTest {
         props.setStaleFallbackEnabled(true);
         QueryCacheStore store = new QueryCacheStore(props);
         dependency = new SlowDependency(props);
-        facade = new QueryFacade(props, store, new RequestCoalescer(), new ConcurrencyLimiter(props), dependency);
+        facade = new QueryFacade(props, store, new RequestCoalescer(props), new ConcurrencyLimiter(props), dependency);
     }
 
     @Test
@@ -86,7 +86,7 @@ class TimeoutDegradationTest {
         QueryCacheStore store = new QueryCacheStore(props);
         SlowDependency dep = new SlowDependency(props);
         dep.setDelayOverride(600L); // 占住唯一许可
-        QueryFacade f = new QueryFacade(props, store, new RequestCoalescer(), new ConcurrencyLimiter(props), dep);
+        QueryFacade f = new QueryFacade(props, store, new RequestCoalescer(props), new ConcurrencyLimiter(props), dep);
 
         int threads = 6;
         CountDownLatch ready = new CountDownLatch(threads);

@@ -13,7 +13,13 @@ public class QueryFailureException extends RuntimeException {
         /** 排队容量已满，被背压拒绝。 */
         OVERLOADED,
         /** 排队等待许可超时。 */
-        ACQUIRE_TIMEOUT
+        ACQUIRE_TIMEOUT,
+        /** 同键合并等待者数量超过容量上限。 */
+        COALESCER_OVERLOADED,
+        /** 同键合并等待在途计算结果超时。 */
+        COALESCE_WAIT_TIMEOUT,
+        /** 在途计算与数据刷新反复交错，重算后仍非最新版本。 */
+        REFRESH_CONFLICT
     }
 
     private final Reason reason;
